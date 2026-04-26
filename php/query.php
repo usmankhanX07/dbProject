@@ -32,6 +32,36 @@ if(isset($_POST['addPerson'])){
     }
 }
 
+if(isset($_POST['bookFlight'])){
+    $personId = $_POST['custID'];
+    $baggage = $_POST['baggageWt'];
+    $flightId = $_POST['flightId'];
+
+    if(empty($personId)){
+        $personIdErr = "Person Id is Required";
+    }
+
+    if(empty($personIdErr)){
+        $query = $pdo->prepare("INSERT INTO ticket (Customer_ID) VALUES (:id)");
+        $query->bindParam("id", $personId);
+        $query->execute();
+        $ticketId = $pdo->lastInsertId();
+
+        $query = $pdo->prepare("INSERT INTO baggage (Weight) VALUES (:weight)");
+        $query->bindParam("weight", $baggage);
+        $query->execute();
+        $baggageId = $pdo->lastInsertId();
+
+        $query = $pdo->prepare("INSERT INTO recordstable (Ticket_ID, Flight_ID, Baggage_ID) VALUES (:tid, :fid, :bid)");
+        $query->bindParam("tid", $ticketId);
+        $query->bindParam("fid", $flightId);
+        $query->bindParam("bid", $baggageId);
+        $query->execute();
+
+        echo "<script>alert('data added');location.assign('../displayBookings.php')</script>";
+        }
+}
+
 /*if(isset($_POST['updatePerson'])){ 
     $personName = $_POST['pName']; 
     $query = $pdo->prepare("UPDATE persons SET name=:name WHERE id=:id");

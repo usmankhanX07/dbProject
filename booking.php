@@ -1,4 +1,6 @@
-<?php include("php/dbcon.php"); ?>
+<?php
+include("php/query.php");
+?>
 
 <?php
 $flightData = [];
@@ -30,16 +32,23 @@ if(isset($_GET['myFlight'])){
 
     <body>
         <div class="container0">
-                        <div style="display: flex; justify-content: center; align-items: center; height:100px">
-            <h2>Customer Login:</h2>
+            <div style="display: flex; justify-content: center; align-items: center; height:100px">
+                <h2>Customer Login:</h2>
                         
             <form action="php/query.php" method="post">
                 <div class="m1">
                     <label for="" class="form-label">Person ID</label>
-</div><input type="text" name="custID" id="" class="form-control" placeholder="" aria-describedby="helpId"/>
                 </div>
-            </form>
-                        <div style="display: flex; justify-content: center; align-items: center; height:100px">
+                 <input type="text" name="custID" id="" class="form-control" placeholder="" aria-describedby="helpId"/>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; height:100px">         
+                <div class="m1">
+                    <label for="" class="form-label">Baggage Weight</label>
+                </div>
+                <input type="text" name="baggageWt" id="" class="form-control" placeholder="" aria-describedby="helpId"/>
+            </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; height:100px">
         <h2>Selected flight:</h2> </div>
             <div class="container">
                 <div class="table-responsive">
@@ -94,8 +103,10 @@ if(isset($_GET['myFlight'])){
                 </div>
             </div>  
             <div style="display: flex; justify-content: center; align-items: center; height:100px">
+                                <input type="hidden" name="flightId" value="<?php echo $flightId ?? '' ?>">
             <button  name= "bookFlight" class="btn btn-primary">Book Flight</button>        
-            </div>    
+            </form>    
+        </div>    
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
