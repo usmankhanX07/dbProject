@@ -77,16 +77,16 @@ include("php/query.php");
                                     c.Name as ZCName,
                                     P.Passport_Expiry as ZPassport
                                 FROM flights f
-                                JOIN airlines al ON f.Airline_ID = al.Airline_ID
-                                JOIN aircrafts ac ON f.Aircraft_ID = ac.Aircraft_ID
-                                JOIN airport dep ON f.Departure_Airport_ID = dep.Airport_ID
-                                JOIN airport arr ON f.Arrival_Airport_ID = arr.Airport_ID
-                                JOIN recordsTable rt ON f.Flight_ID = rt.Flight_ID
-                                JOIN ticket t ON rt.Ticket_ID = t.Ticket_ID
-                                JOIN Customers c on c.Customer_ID = t.Customer_ID
-                                JOIN Passports P on P.Customer_ID = C.Customer_ID
-                                JOIN Pilot Pi on Pi.Pilot_ID = rt.Pilot_ID
-                                JOIN Baggage B on B.Baggage_Tag_ID = rt.Baggage_ID;
+                                LEFT JOIN airlines al ON f.Airline_ID = al.Airline_ID
+                                LEFT JOIN aircrafts ac ON f.Aircraft_ID = ac.Aircraft_ID
+                                LEFT JOIN airport dep ON f.Departure_Airport_ID = dep.Airport_ID
+                                LEFT JOIN airport arr ON f.Arrival_Airport_ID = arr.Airport_ID
+                                LEFT JOIN recordsTable rt ON f.Flight_ID = rt.Flight_ID
+                                LEFT JOIN ticket t ON rt.Ticket_ID = t.Ticket_ID
+                                LEFT JOIN Customers c on c.Customer_ID = t.Customer_ID
+                                LEFT JOIN Passports P on P.Customer_ID = C.Customer_ID
+                                LEFT JOIN Pilot Pi on Pi.Pilot_ID = rt.Pilot_ID
+                                LEFT JOIN Baggage B on B.Baggage_Tag_ID = rt.Baggage_ID;
                             ");                  
                             $allFlights = $query->fetchAll(PDO::FETCH_ASSOC);
                             foreach($allFlights as $flight){
