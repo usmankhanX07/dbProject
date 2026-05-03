@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collaboration Diagram — Admin</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 28px; }
+  .card { background: #fff; border-radius: 12px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.09); max-width: 1020px; margin: 0 auto; }
+  h2  { font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 0 0 4px; }
+  .sub { font-size: 12px; color: #888; margin: 0 0 22px; }
+  svg  { display: block; width: 100%; }
+  .legend { display: flex; gap: 28px; margin-top: 16px; font-size: 11px; color: #555; flex-wrap: wrap; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>Collaboration Diagram — Admin Flow (Flight Management System)</h2>
+  <p class="sub">Derived from Admin sequence diagram. Decimal numbering encodes message sequence; alt branches shown with condition labels.</p>
+
+  <svg viewBox="0 0 980 540" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="fwd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M1 2L9 5L1 8" fill="none" stroke="#1a5276" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <marker id="ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M1 2L9 5L1 8" fill="none" stroke="#7b241c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <!-- ═══════════════════════ OBJECT BOXES ═══════════════════════ -->
+
+    <!-- Admin (actor) -->
+    <rect x="12"  y="250" width="118" height="48" rx="6" fill="#1F4E79" stroke="#1F4E79"/>
+    <text x="71"  y="268" text-anchor="middle" font-size="9"  fill="#a8d0f0" font-family="Arial">«actor»</text>
+    <text x="71"  y="287" text-anchor="middle" font-size="12" font-weight="bold" fill="#fff" font-family="Arial">Admin</text>
+
+    <!-- :Website/UI -->
+    <rect x="206" y="250" width="140" height="48" rx="6" fill="#fff" stroke="#1F4E79" stroke-width="1.8"/>
+    <line x1="206" y1="274" x2="346" y2="274" stroke="#1F4E79" stroke-width="0.7"/>
+    <text x="276" y="267" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#1F4E79" font-family="Arial">Website / UI</text>
+    <text x="276" y="288" text-anchor="middle" font-size="10"   fill="#444"   font-family="Arial">:UI</text>
+
+    <!-- :FlightManagementSystem -->
+    <rect x="440" y="250" width="190" height="48" rx="6" fill="#fff" stroke="#0B5345" stroke-width="1.8"/>
+    <line x1="440" y1="274" x2="630" y2="274" stroke="#0B5345" stroke-width="0.7"/>
+    <text x="535" y="265" text-anchor="middle" font-size="10"   font-weight="bold" fill="#0B5345" font-family="Arial">Flight Management System</text>
+    <text x="535" y="286" text-anchor="middle" font-size="10"   fill="#444"   font-family="Arial">:FMS</text>
+
+    <!-- :empDatabase -->
+    <rect x="762" y="58" width="136" height="48" rx="6" fill="#fff" stroke="#7D3C98" stroke-width="1.8"/>
+    <line x1="762" y1="82"  x2="898" y2="82"  stroke="#7D3C98" stroke-width="0.7"/>
+    <text x="830" y="75"  text-anchor="middle" font-size="10.5" font-weight="bold" fill="#7D3C98" font-family="Arial">empDatabase</text>
+    <text x="830" y="96"  text-anchor="middle" font-size="10"   fill="#444"   font-family="Arial">:empDatabase</text>
+
+    <!-- :Flights -->
+    <rect x="762" y="250" width="136" height="48" rx="6" fill="#fff" stroke="#512E8A" stroke-width="1.8"/>
+    <line x1="762" y1="274" x2="898" y2="274" stroke="#512E8A" stroke-width="0.7"/>
+    <text x="830" y="267" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#512E8A" font-family="Arial">Flights</text>
+    <text x="830" y="288" text-anchor="middle" font-size="10"   fill="#444"   font-family="Arial">:Flights</text>
+
+    <!-- :Bookings -->
+    <rect x="762" y="440" width="136" height="48" rx="6" fill="#fff" stroke="#512E8A" stroke-width="1.8"/>
+    <line x1="762" y1="464" x2="898" y2="464" stroke="#512E8A" stroke-width="0.7"/>
+    <text x="830" y="457" text-anchor="middle" font-size="10.5" font-weight="bold" fill="#512E8A" font-family="Arial">Bookings</text>
+    <text x="830" y="478" text-anchor="middle" font-size="10"   fill="#444"   font-family="Arial">:Bookings</text>
+
+    <!-- ═══════════════════════ LINK LINES ═══════════════════════ -->
+
+    <!-- Link A: Admin ——— Website/UI -->
+    <line x1="130" y1="274" x2="206" y2="274" stroke="#888" stroke-width="1.3"/>
+
+    <!-- Link B: Website/UI ——— FMS -->
+    <line x1="346" y1="274" x2="440" y2="274" stroke="#888" stroke-width="1.3"/>
+
+    <!-- Link C: FMS ——— :empDatabase (diagonal up-right) -->
+    <line x1="568" y1="250" x2="792" y2="106" stroke="#888" stroke-width="1.3"/>
+
+    <!-- Link D: FMS ——— :Flights (horizontal) -->
+    <line x1="630" y1="274" x2="762" y2="274" stroke="#888" stroke-width="1.3"/>
+
+    <!-- Link E: FMS ——— :Bookings (diagonal down-right) -->
+    <line x1="568" y1="298" x2="792" y2="440" stroke="#888" stroke-width="1.3"/>
+
+    <!-- ═══════════════════════ MESSAGE LABELS ═══════════════════════ -->
+
+    <!-- ── Link A: Admin ——— Website/UI, midpoint x≈168 ── -->
+    <text x="168" y="240" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">1: logIn(details) ›</text>
+    <text x="168" y="230" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">5: enterCommand() ›</text>
+    <text x="168" y="220" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">8: selectFlight(flightID) ›</text>
+    <text x="168" y="288" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 11: returnSuccess()</text>
+
+    <!-- ── Link B: Website/UI ——— FMS, midpoint x≈393 ── -->
+    <text x="393" y="240" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">2: sendDetails() ›</text>
+    <text x="393" y="230" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">6: dispatch() ›</text>
+    <text x="393" y="288" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 4: return()</text>
+    <text x="393" y="299" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 10: return</text>
+
+    <!-- ── Link C: FMS ——— :empDatabase, midpoint ≈(680, 178) ── -->
+    <text x="653" y="168" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">3: verifyDetails() ›</text>
+    <text x="653" y="180" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 3.1: return()</text>
+
+    <!-- ── Link D: FMS ——— :Flights, midpoint x≈696 ── -->
+    <text x="696" y="261" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">7b [createFlight]: dispatch ›</text>
+    <text x="696" y="289" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 9b: return</text>
+
+    <!-- ── Link E: FMS ——— :Bookings, midpoint ≈(680, 369) ── -->
+    <text x="650" y="358" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">7a [manageBooking]: dispatch ›</text>
+    <text x="650" y="370" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 9a: return</text>
+
+    <!-- ═══ alt condition note ═══ -->
+    <rect x="430" y="326" width="208" height="50" rx="5" fill="#fef9e7" stroke="#d4ac0d" stroke-width="1" stroke-dasharray="5 3"/>
+    <text x="534" y="344" text-anchor="middle" font-size="9" fill="#7d6608" font-family="Arial" font-weight="bold">alt</text>
+    <text x="534" y="358" text-anchor="middle" font-size="8.5" fill="#7d6608" font-family="Arial">[manageBooking]  →  7a path (:Bookings)</text>
+    <text x="534" y="369" text-anchor="middle" font-size="8.5" fill="#7d6608" font-family="Arial">[createFlight]  →  7b path (:Flights)</text>
+  </svg>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#1F4E79"></span> Actor / Boundary</span>
+    <span><span class="dot" style="background:#0B5345"></span> Controller (FMS)</span>
+    <span><span class="dot" style="background:#7D3C98"></span> empDatabase (entity)</span>
+    <span><span class="dot" style="background:#512E8A"></span> :Flights / :Bookings (entity)</span>
+    <span style="color:#1a5276">›  Blue = forward call</span>
+    <span style="color:#7b241c">‹  Red = return message</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collaboration Diagram — Flight Booking</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f2f5; margin: 0; padding: 24px; }
+  .card { background: #fff; border-radius: 10px; padding: 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); max-width: 940px; margin: 0 auto; }
+  h2  { font-size: 15px; font-weight: 700; color: #1a1a1a; margin: 0 0 4px; }
+  .sub { font-size: 12px; color: #777; margin: 0 0 20px; }
+  svg { display: block; width: 100%; }
+  .legend { display: flex; gap: 24px; margin-top: 14px; font-size: 11px; color: #555; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h2>Collaboration Diagram — Flight Booking System</h2>
+  <p class="sub">Derived from sequence diagram. Numbers follow decimal notation: nested calls use X.Y format.</p>
+
+  <svg viewBox="0 0 880 500" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="fwd" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M1 1L9 5L1 9" fill="none" stroke="#1a5276" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <marker id="ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M1 1L9 5L1 9" fill="none" stroke="#7b241c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <!-- ═══════════════════════ OBJECT BOXES ═══════════════════════ -->
+
+    <!-- Customer (actor) -->
+    <rect x="10"  y="226" width="108" height="46" rx="6" fill="#1F4E79" stroke="#1F4E79" stroke-width="1"/>
+    <text x="64"  y="242" text-anchor="middle" font-size="9"  fill="#a8d0f0" font-family="Arial">«actor»</text>
+    <text x="64"  y="260" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff" font-family="Arial">Customer</text>
+
+    <!-- :Website/UI -->
+    <rect x="182" y="226" width="130" height="46" rx="6" fill="#fff" stroke="#1F4E79" stroke-width="1.5"/>
+    <line x1="182" y1="250" x2="312" y2="250" stroke="#1F4E79" stroke-width="0.6"/>
+    <text x="247" y="243" text-anchor="middle" font-size="10" font-weight="bold" fill="#1F4E79" font-family="Arial">Website / UI</text>
+    <text x="247" y="264" text-anchor="middle" font-size="10" fill="#444" font-family="Arial">:UI</text>
+
+    <!-- :FlightManagementSystem -->
+    <rect x="406" y="226" width="178" height="46" rx="6" fill="#fff" stroke="#0B5345" stroke-width="1.5"/>
+    <line x1="406" y1="250" x2="584" y2="250" stroke="#0B5345" stroke-width="0.6"/>
+    <text x="495" y="241" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#0B5345" font-family="Arial">Flight Management System</text>
+    <text x="495" y="263" text-anchor="middle" font-size="10" fill="#444" font-family="Arial">:FMS</text>
+
+    <!-- :Customer (entity/DB object) -->
+    <rect x="690" y="52" width="120" height="46" rx="6" fill="#fff" stroke="#512E8A" stroke-width="1.5"/>
+    <line x1="690" y1="76" x2="810" y2="76" stroke="#512E8A" stroke-width="0.6"/>
+    <text x="750" y="69" text-anchor="middle" font-size="10" font-weight="bold" fill="#512E8A" font-family="Arial">Customer</text>
+    <text x="750" y="90" text-anchor="middle" font-size="10" fill="#444" font-family="Arial">:Customer</text>
+
+    <!-- :Flights -->
+    <rect x="690" y="226" width="120" height="46" rx="6" fill="#fff" stroke="#512E8A" stroke-width="1.5"/>
+    <line x1="690" y1="250" x2="810" y2="250" stroke="#512E8A" stroke-width="0.6"/>
+    <text x="750" y="243" text-anchor="middle" font-size="10" font-weight="bold" fill="#512E8A" font-family="Arial">Flights</text>
+    <text x="750" y="264" text-anchor="middle" font-size="10" fill="#444" font-family="Arial">:Flights</text>
+
+    <!-- :Bookings -->
+    <rect x="690" y="410" width="120" height="46" rx="6" fill="#fff" stroke="#512E8A" stroke-width="1.5"/>
+    <line x1="690" y1="434" x2="810" y2="434" stroke="#512E8A" stroke-width="0.6"/>
+    <text x="750" y="427" text-anchor="middle" font-size="10" font-weight="bold" fill="#512E8A" font-family="Arial">Bookings</text>
+    <text x="750" y="448" text-anchor="middle" font-size="10" fill="#444" font-family="Arial">:Bookings</text>
+
+    <!-- ═══════════════════════ LINK LINES ═══════════════════════ -->
+
+    <!-- Link A: Customer ——— Website/UI -->
+    <line x1="118" y1="249" x2="182" y2="249" stroke="#555" stroke-width="1.2"/>
+
+    <!-- Link B: Website/UI ——— FMS -->
+    <line x1="312" y1="249" x2="406" y2="249" stroke="#555" stroke-width="1.2"/>
+
+    <!-- Link C: FMS ——— :Customer (diagonal up-right) -->
+    <line x1="545" y1="226" x2="718" y2="98" stroke="#555" stroke-width="1.2"/>
+
+    <!-- Link D: FMS ——— :Flights -->
+    <line x1="584" y1="249" x2="690" y2="249" stroke="#555" stroke-width="1.2"/>
+
+    <!-- Link E: FMS ——— :Bookings (diagonal down-right) -->
+    <line x1="545" y1="272" x2="718" y2="410" stroke="#555" stroke-width="1.2"/>
+
+    <!-- ═══════════════════════ MESSAGE LABELS ═══════════════════════ -->
+
+    <!-- LINK A labels (Customer — Website/UI), midpoint x≈150 -->
+    <!-- Forward (above line) -->
+    <text x="150" y="237" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">1: logIn(details) ›</text>
+    <text x="150" y="227" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">8: selectFlight(flightID) ›</text>
+    <!-- Return (below line) -->
+    <text x="150" y="263" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 11a.3: displaySuccess()</text>
+    <text x="150" y="274" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 11b.1: displayError()</text>
+
+    <!-- LINK B labels (Website/UI — FMS), midpoint x≈359 -->
+    <!-- Forward (above line) -->
+    <text x="359" y="238" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">2: sendDetails() ›</text>
+    <text x="359" y="228" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">5: fetchFlights() ›</text>
+    <text x="359" y="218" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">9: sendDetails() ›</text>
+    <!-- Return (below line) -->
+    <text x="359" y="262" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 4: return()</text>
+    <text x="359" y="272" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 7: returnAvailableFlights()</text>
+    <text x="359" y="282" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 11a.2 / 11b: return()</text>
+
+    <!-- LINK C labels (FMS — :Customer diagonal) -->
+    <!-- Position labels near midpoint of diagonal (~631, 162), offset to avoid the line -->
+    <text x="600" y="152" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">3: verifyDetails() ›</text>
+    <text x="600" y="164" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 3.1: return()</text>
+
+    <!-- LINK D labels (FMS — :Flights), midpoint x≈637 -->
+    <!-- Forward (above) -->
+    <text x="637" y="236" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">6: dispatch ›</text>
+    <text x="637" y="225" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">10: isAvailable() ›</text>
+    <!-- Return (below) -->
+    <text x="637" y="263" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 6.1: return</text>
+    <text x="637" y="274" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 10.1: return</text>
+
+    <!-- LINK E labels (FMS — :Bookings diagonal) -->
+    <!-- Midpoint ~(631, 341), offset left of line -->
+    <text x="594" y="336" text-anchor="middle" font-size="8.5" fill="#1a5276" font-family="Arial">11a [avail]: createBooking() ›</text>
+    <text x="600" y="348" text-anchor="middle" font-size="8.5" fill="#7b241c" font-family="Arial">‹ 11a.1: return</text>
+
+    <!-- ═══ Condition note for alt block ═══ -->
+    <rect x="396" y="292" width="188" height="38" rx="4" fill="#fef9e7" stroke="#d4ac0d" stroke-width="1" stroke-dasharray="4 2"/>
+    <text x="490" y="308" text-anchor="middle" font-size="9" fill="#7d6608" font-family="Arial" font-weight="bold">alt</text>
+    <text x="490" y="321" text-anchor="middle" font-size="8.5" fill="#7d6608" font-family="Arial">[flightIsAvailable] → 11a path</text>
+    <text x="490" y="331" text-anchor="middle" font-size="8.5" fill="#7d6608" font-family="Arial">[flightIsNotAvailable] → 11b path</text>
+  </svg>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#1F4E79"></span> Actor / UI objects</span>
+    <span><span class="dot" style="background:#0B5345"></span> Controller (FMS)</span>
+    <span><span class="dot" style="background:#512E8A"></span> Entity objects</span>
+    <span style="color:#1a5276">› Blue = forward call</span>
+    <span style="color:#7b241c">‹ Red = return message</span>
+  </div>
+</div>
+</body>
+</html>
