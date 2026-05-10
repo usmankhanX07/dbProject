@@ -72,7 +72,7 @@ include("php/query.php");
                             <td><?php echo $customer['Nationality']?></td>
                             <td><?php echo $customer['Passport_ID']?></td>
                             <td><?php echo $customer['Passport_Expiry']?></td>
-                            <td><a class="btn btn-sm btn-info" href="edit.php?c_id=<?php echo $customer['Customer_ID']?>">Edit</a></td>
+                            <td><a class="btn btn-sm btn-info" href="editCustomer.php?c_id=<?php echo $customer['Customer_ID']?>">Edit</a></td>
                         </tr>
                         <?php } ?>
                     </tbody>
