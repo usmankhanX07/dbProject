@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2026 at 11:07 AM
+-- Generation Time: May 10, 2026 at 11:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,8 @@ CREATE TABLE `aircrafts` (
 
 INSERT INTO `aircrafts` (`Aircraft_ID`, `Manufacturer`, `Model`, `Total_Capacity`, `Date_Of_Manufacture`, `Airline_ID`) VALUES
 (1, 'Airbus', 'A320', 250, '2016-04-01', 1),
-(2, 'Boeing', '777', 320, '2021-02-12', 1);
+(2, 'Boeing', '777', 320, '2021-02-12', 1),
+(3, 'Boeing', '747', 230, '2025-10-13', 2);
 
 -- --------------------------------------------------------
 
@@ -60,7 +61,8 @@ CREATE TABLE `airlines` (
 --
 
 INSERT INTO `airlines` (`Airline_ID`, `Airline_Name`) VALUES
-(1, 'PIA');
+(1, 'PIA'),
+(2, 'Qatar Airways');
 
 -- --------------------------------------------------------
 
@@ -82,7 +84,8 @@ CREATE TABLE `airport` (
 INSERT INTO `airport` (`Airport_ID`, `Airport_Name`, `City`, `TimeZone`) VALUES
 (1, 'Jinnah International Karachi', 'Karachi', '2026-04-25 14:51:03.000000'),
 (2, 'Dubai International Airport', 'Dubai', '2026-04-25 15:12:06.000000'),
-(3, 'Allama Iqbal International', 'Lahore', '0000-00-00 00:00:00.000000');
+(3, 'Allama Iqbal International', 'Lahore', '0000-00-00 00:00:00.000000'),
+(4, 'Hamad International', 'Doha', '2026-05-10 06:05:28.231000');
 
 -- --------------------------------------------------------
 
@@ -108,7 +111,9 @@ INSERT INTO `baggage` (`Baggage_Tag_ID`, `Weight`) VALUES
 (6, 4),
 (7, 7),
 (8, 6.8),
-(9, 6.8);
+(9, 6.8),
+(10, 7.7),
+(12, 3.31);
 
 -- --------------------------------------------------------
 
@@ -128,6 +133,7 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`Customer_ID`, `Name`, `Nationality`) VALUES
 (1, 'Anam Qureshi', 'Pakistani'),
+(13, 'Yousuf', 'Croatian'),
 (123, 'Usman', 'Pakistani'),
 (999, 'Ahmed', 'Pakistani'),
 (1111, 'Amna', 'Pakistani'),
@@ -162,7 +168,8 @@ CREATE TABLE `flights` (
 
 INSERT INTO `flights` (`Flight_ID`, `Flight_Type`, `Arrival_Time`, `Departure_Time`, `Airline_ID`, `Aircraft_ID`, `Departure_Airport_Id`, `Arrival_Airport_Id`, `Terminal_ID`) VALUES
 (1, 'International', '2026-04-25 22:13:03', '2026-04-25 20:13:03', 1, 1, 1, 2, 1),
-(2, 'Domestic', '2026-04-26 19:18:06', '2026-04-26 15:18:06', 1, 2, 3, 1, 2);
+(2, 'Domestic', '2026-04-26 19:18:06', '2026-04-26 15:18:06', 1, 2, 3, 1, 2),
+(3, 'International', '2026-05-10 22:08:40', '2026-05-10 14:08:40', 2, 3, 4, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -185,7 +192,7 @@ CREATE TABLE `gateway` (
 CREATE TABLE `passports` (
   `Passport_ID` int(11) NOT NULL,
   `Passport_Expiry` date DEFAULT NULL,
-  `Customer_ID` int(11) DEFAULT NULL
+  `Customer_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -193,9 +200,10 @@ CREATE TABLE `passports` (
 --
 
 INSERT INTO `passports` (`Passport_ID`, `Passport_Expiry`, `Customer_ID`) VALUES
-(10000121, '2029-12-06', 123),
-(10000122, '2032-02-09', 1111),
-(10000123, '2032-03-09', 999);
+(10000124, '2029-12-06', 123),
+(10000125, '2032-03-09', 1111),
+(10000126, '2032-02-22', 999),
+(10000127, '2026-09-01', 13);
 
 -- --------------------------------------------------------
 
@@ -233,7 +241,20 @@ INSERT INTO `pilot` (`Pilot_ID`, `Pilot_Name`, `Hours_Worked`) VALUES
 (4, 'Fatima', 4),
 (5, 'Mohammad', 9),
 (6, 'Maryam', 40),
-(7, 'Mehdi', 65);
+(7, 'Mehdi', 65),
+(8, 'Zara', 35),
+(9, 'Fatima', 25),
+(10, 'James', 42),
+(11, 'Sarah', 58),
+(12, 'Omar', 31),
+(13, 'Emily', 67),
+(14, 'Daniel', 19),
+(15, 'Sophia', 53),
+(16, 'Marcus', 38),
+(17, 'Layla', 62),
+(18, 'Ethan', 45),
+(19, 'Amelia', 27),
+(20, 'Hassan', 50);
 
 -- --------------------------------------------------------
 
@@ -253,12 +274,13 @@ CREATE TABLE `recordstable` (
 --
 
 INSERT INTO `recordstable` (`Baggage_ID`, `Pilot_ID`, `Ticket_ID`, `Flight_ID`) VALUES
-(4, 1, 3, NULL),
 (5, 2, 4, 1),
 (6, 3, 5, 1),
 (8, 5, 7, 1),
 (7, 4, 6, 2),
-(9, 6, 8, 2);
+(9, 6, 8, 2),
+(10, 7, 9, 2),
+(12, 9, 11, 3);
 
 -- --------------------------------------------------------
 
@@ -278,7 +300,8 @@ CREATE TABLE `terminals` (
 
 INSERT INTO `terminals` (`Terminal_ID`, `Terminal_Name`, `Airport_ID`) VALUES
 (1, 'Primary Terminal - A', 1),
-(2, 'Secondary Terminal - Domestic Flights', 1);
+(2, 'Secondary Terminal - Domestic Flights', 1),
+(3, 'International Terminal - Doha', 4);
 
 -- --------------------------------------------------------
 
@@ -296,12 +319,11 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`Ticket_ID`, `Customer_ID`) VALUES
-(1, 123),
-(2, 123),
-(3, 123),
+(11, 13),
 (4, 123),
 (5, 123),
 (6, 123),
+(9, 123),
 (8, 999),
 (7, 1111);
 
@@ -409,25 +431,25 @@ ALTER TABLE `ticket`
 -- AUTO_INCREMENT for table `aircrafts`
 --
 ALTER TABLE `aircrafts`
-  MODIFY `Aircraft_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Aircraft_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `airlines`
 --
 ALTER TABLE `airlines`
-  MODIFY `Airline_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Airline_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `airport`
 --
 ALTER TABLE `airport`
-  MODIFY `Airport_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Airport_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `baggage`
 --
 ALTER TABLE `baggage`
-  MODIFY `Baggage_Tag_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Baggage_Tag_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -436,22 +458,28 @@ ALTER TABLE `customers`
   MODIFY `Customer_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5618;
 
 --
+-- AUTO_INCREMENT for table `passports`
+--
+ALTER TABLE `passports`
+  MODIFY `Passport_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10000128;
+
+--
 -- AUTO_INCREMENT for table `pilot`
 --
 ALTER TABLE `pilot`
-  MODIFY `Pilot_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Pilot_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `recordstable`
 --
 ALTER TABLE `recordstable`
-  MODIFY `Pilot_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Pilot_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `Ticket_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Ticket_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
