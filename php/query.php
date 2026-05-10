@@ -50,7 +50,9 @@ if(isset($_POST['bookFlight'])){
     $baggage = $_POST['baggageWt'];
     $flightId = $_POST['flightId'];
 
-    if(empty($personId)){
+    $personIdErr="";
+    
+    if(empty($personId) || $personId < 0 || $baggage<0){
         $personIdErr = "Person Id is Required";
     }
 
@@ -72,7 +74,10 @@ if(isset($_POST['bookFlight'])){
         $query->execute();
 
         echo "<script>alert('data added');location.assign('../displayBookings.php')</script>";
-        }
+    }
+    else {
+        echo "<script>alert('exception alert: data is invalid');location.assign('../customerUI.php')</script>";
+    }
 }
 
 /*if(isset($_POST['updatePerson'])){ 

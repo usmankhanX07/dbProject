@@ -55,12 +55,14 @@ include("php/query.php");
                             <th width="100px">ID</th>
                             <th width="200px">Name</th>
                             <th width="200px">Nationality</th>
-                            <th width="100px">Action</th>
+                            <th width="100px">PassportID</th>
+                            <th width="100px">PassportExpiry</th>
+                            <th width="50px">Edit</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                        $query = $pdo->query("select * from customers");
+                        $query = $pdo->query("select c.*, P.Passport_ID, P.Passport_Expiry from Customers C left join Passports P on C.Customer_ID = P.Customer_ID");
                         $allCustomers = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach($allCustomers as $customer){
                         ?>
@@ -68,6 +70,8 @@ include("php/query.php");
                             <td><?php echo $customer['Customer_ID']?></td>
                             <td><?php echo $customer['Name']?></td>
                             <td><?php echo $customer['Nationality']?></td>
+                            <td><?php echo $customer['Passport_ID']?></td>
+                            <td><?php echo $customer['Passport_Expiry']?></td>
                             <td><a class="btn btn-sm btn-info" href="edit.php?c_id=<?php echo $customer['Customer_ID']?>">Edit</a></td>
                         </tr>
                         <?php } ?>
