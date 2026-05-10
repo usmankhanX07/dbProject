@@ -79,7 +79,7 @@ if(isset($_GET['myFlight'])){
                                 JOIN aircrafts ac ON f.Aircraft_ID = ac.Aircraft_ID
                                 JOIN airport dep ON f.Departure_Airport_ID = dep.Airport_ID
                                 JOIN airport arr ON f.Arrival_Airport_ID = arr.Airport_ID
-                                WHERE f.Flight_ID = :id;
+                                WHERE f.Flight_ID in (select f1.Flight_ID from flights f1 where f1.Flight_ID = :id);
                             ");
                             $query->bindParam("id", $flightId); 
                             $query->execute();    

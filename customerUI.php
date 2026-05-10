@@ -35,6 +35,10 @@ include("php/query.php");
                     <label for="" class="form-label">Person Nationality</label>
                     <input type="text" name="custNationality" id="" class="form-control" placeholder="" aria-describedby="helpId"/>
                 </div>
+               <div class="m1">
+                    <label for="" class="form-label">Person Passport Expiry</label>
+                    <input type="date" name="custPassportExpiry" id="custPassportExpiry" class="form-control" placeholder="" aria-describedby="helpId"/>
+                </div>
                 <button name= "addPerson" class="btn btn-primary">Add</button>
             </form>
             <br>
